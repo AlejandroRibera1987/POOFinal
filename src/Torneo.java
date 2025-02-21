@@ -11,19 +11,11 @@ public class Torneo {
 	}
 	
 	public void agragarEquipo(Equipo equipo) {
-		if (equipos.size() < 8) {
 			equipos.add(equipo);
-		}else {
-			System.out.println("Ya estan los 8 Equipos Agragados");
-		}
 	}
 	
 	
 	public void iniciarTorneo() {
-		if (equipos.size() > 8) {
-			System.out.println("Faltan agregar Equipos");
-			return;
-		}
 		
 		ArrayList<Equipo> rondaActual = new ArrayList<>(equipos);
 		int ronda = 1;

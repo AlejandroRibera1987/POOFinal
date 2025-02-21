@@ -8,7 +8,7 @@ public class Main {
         // Creación de jugadores y equipos
         System.out.println("Creación de Equipos para el Torneo de Voleibol de Playa");
         
-        for (int i = 1; i <= 8; i++) {
+        for (int i = 1; i <= 2; i++) {
             System.out.println("\nCreando Equipo " + i);
             
             // Crear Jugador 1

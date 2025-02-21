@@ -32,5 +32,14 @@ public class Equipo {
 	public Jugador getSuplente() {
 		return suplente;
 	}
+
+
+
+	@Override
+	public String toString() {
+		return nombreEquipo + " los Jugadores son: " + jugador1.getNombre() + ", " + jugador2.getNombre();
+	}
+	
+	
 	
 }
