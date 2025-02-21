@@ -49,6 +49,8 @@ public class Partido {
 		estado = Estado.FINALIZADO;
 		System.out.println("El partido termino, equipo ganador: " + obtenerGanador().getNombreEquipo());
 		
+		System.out.println("-----------------------------FIN DE RONDA: " + Torneo.getRonda() + "-----------------------------------------");
+		
 	}
 	
 	public Equipo obtenerGanador() {

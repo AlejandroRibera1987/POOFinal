@@ -37,7 +37,7 @@ public class Equipo {
 
 	@Override
 	public String toString() {
-		return nombreEquipo + " los Jugadores son: " + jugador1.getNombre() + ", " + jugador2.getNombre();
+		return nombreEquipo;
 	}
 	
 	

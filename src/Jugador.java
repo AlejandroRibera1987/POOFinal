@@ -21,6 +21,13 @@ public class Jugador {
 	public Estadisticas getEstadisticas() {
 		return estadisticas;
 	}
+
+	@Override
+	public String toString() {
+		return  nombre;
+	}
+
+	
 	
 	
 }
