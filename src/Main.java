@@ -4,7 +4,7 @@ public class Main {
 	public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
         Torneo torneo = new Torneo();
-        int cantidadEquipos = 4;
+        int cantidadEquipos = 2;
 
        
         System.out.println("Equipos al torneo de Voley");

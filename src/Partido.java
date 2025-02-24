@@ -1,4 +1,6 @@
-import java.util.Random;
+import java.util.Scanner;
+
+import javax.swing.plaf.synth.SynthOptionPaneUI;
 
 public class Partido {
 	private Equipo equipo1;
@@ -21,35 +23,112 @@ public class Partido {
 
 	
 	public void registrarPuntos() {
-		Random random = new Random();
+		Scanner scanner = new Scanner(System.in);
 		
 		while (setActual < 3 && obtenerGanador() == null) {
 			int puntosEquipo1 = 0;
 			int puntosEquipo2 = 0;
 			
-			while ((puntosEquipo1 < PUNTOS_PARA_GANAR && puntosEquipo2 < PUNTOS_PARA_GANAR) ||
-		               Math.abs(puntosEquipo1 - puntosEquipo2) < DIFERENCIA_PUNTOS) {
-	            if (random.nextBoolean()) {
-	                puntosEquipo1++;
-	            } else {
-	                puntosEquipo2++;
-	            }
+			System.out.println("\nIngrese los puntos del set " + (setActual + 1));
+			
+			while (true) {
+				System.out.println(equipo1.getNombreEquipo() + " puntos: ");
+				puntosEquipo1 = scanner.nextInt();
+				
+				System.out.println(equipo2.getNombreEquipo() +" puntos: ");
+				puntosEquipo2 = scanner.nextInt();
+				
+				if ((puntosEquipo1 >= PUNTOS_PARA_GANAR || puntosEquipo2 >= PUNTOS_PARA_GANAR) 
+						&& Math.abs(puntosEquipo1 - puntosEquipo2) >= DIFERENCIA_PUNTOS) {
+					break;
+				}else {
+					System.err.println("Los puntos ingresados no son validos, un equipo gano con: " + PUNTOS_PARA_GANAR + " con al menos " +
+										DIFERENCIA_PUNTOS + " puntos de diferencia.");
+				}
+				
 			}
 			
 			puntajeEquipo1[setActual] = puntosEquipo1;
 			puntajeEquipo2[setActual] = puntosEquipo2;
 			
-			System.out.println("Set " + (setActual + 1) + ": " + equipo1.getNombreEquipo() + " " + puntosEquipo1 + " Puntos\n" + 
-																equipo2.getNombreEquipo() + " " + puntosEquipo2 + " Puntos");
-			
-			setActual++;
+			System.out.println("\nSet " + (setActual + 1) + " finalizado");
+			System.out.println(equipo1.getNombreEquipo() + " " + puntosEquipo1 + " puntos");
+			System.out.println(equipo2.getNombreEquipo() + " " + puntosEquipo2 + " puntos");
+			System.out.println("\n--------------------------------------------------------");
+			setActual ++;
 			
 		}
 		
 		estado = Estado.FINALIZADO;
-		System.out.println("El partido termino, equipo ganador: " + obtenerGanador().getNombreEquipo());
+		System.out.println("\nEl partido termino, equipo ganador: " + obtenerGanador().getNombreEquipo());
+		
+		registrarEstadisticas();
 		
 		System.out.println("-----------------------------FIN DE RONDA: " + Torneo.getRonda() + "-----------------------------------------");
+		
+	}
+	
+	public void registrarEstadisticas() {
+		Scanner scanner = new Scanner(System.in);
+		
+		
+		System.out.println("----Queres registrar las estadisticas del Partido (s/n)-------");
+		String opcion = scanner.nextLine();
+		
+		if (!opcion.equalsIgnoreCase("s")) {
+			return;			
+		}
+			
+			System.out.println("\n-----Registar estadisticas del partido-------");
+			
+			for (Jugador jugador : equipo1.getJugadores()) {
+		        
+				System.out.println("\nEstadísticas para " + jugador.getNombre() + ":");
+
+		        System.out.print("Numero de aces: ");
+		        int aces = scanner.nextInt();
+		        for (int i = 0; i < aces; i++) {
+		            jugador.getEstadisticas().registrarAce();
+		        }
+
+		        System.out.print("Numero de bloqueos: ");
+		        int bloqueos = scanner.nextInt();
+		        for (int i = 0; i < bloqueos; i++) {
+		            jugador.getEstadisticas().registrarBloqueo();
+		        }
+
+		        System.out.print("Numero de ataques: ");
+		        int ataques = scanner.nextInt();
+		        for (int i = 0; i < ataques; i++) {
+		            jugador.getEstadisticas().registrarAtaque();
+		        }
+
+		        jugador.mostrarEstadisticas(); 
+			}
+			
+			for (Jugador jugador : equipo2.getJugadores()) {
+		        System.out.println("\nEstadísticas para " + jugador.getNombre() + ":");
+
+		        System.out.print("Número de aces: ");
+		        int aces = scanner.nextInt();
+		        for (int i = 0; i < aces; i++) {
+		            jugador.getEstadisticas().registrarAce();
+		        }
+
+		        System.out.print("Número de bloqueos: ");
+		        int bloqueos = scanner.nextInt();
+		        for (int i = 0; i < bloqueos; i++) {
+		            jugador.getEstadisticas().registrarBloqueo();
+		        }
+
+		        System.out.print("Número de ataques: ");
+		        int ataques = scanner.nextInt();
+		        for (int i = 0; i < ataques; i++) {
+		            jugador.getEstadisticas().registrarAtaque();
+		        }
+
+		        jugador.mostrarEstadisticas();
+		    }		
 		
 	}
 	
